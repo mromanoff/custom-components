@@ -1,0 +1,14 @@
+:root {
+
+  --toggle-button-color: #2d7dff;
+  --toggle-button-background-color: #e4edff;
+  --toggle-button-border-radius: 4px;
+  font-size: 1em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial,
+    sans-serif;
+}
+
+body {
+  padding: 1rem;
+}
