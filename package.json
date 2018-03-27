@@ -1,0 +1,30 @@
+{
+  "name": "custom-component",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "watch": "parcel watch index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mromanoff/custom-components.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mromanoff/custom-components/issues"
+  },
+  "homepage": "https://github.com/mromanoff/custom-components#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "stylelint-config-standard": "^18.2.0"
+  },
+  "dependencies": {
+    "autoprefixer": "^8.2.0",
+    "babel-plugin-transform-custom-element-classes": "^0.1.0",
+    "babel-preset-env": "^1.6.1",
+    "postcss-modules": "^1.1.0"
+  }
+}

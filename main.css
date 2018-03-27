@@ -1,14 +1,39 @@
 :root {
-
   --toggle-button-color: #2d7dff;
   --toggle-button-background-color: #e4edff;
   --toggle-button-border-radius: 4px;
+
   font-size: 1em;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial,
-    sans-serif;
+  Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial,
+  sans-serif;
 }
 
 body {
   padding: 1rem;
+}
+
+toggle-button {
+  overflow: hidden;
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background: white;
+  animation: ripple-animation 2s;
+}
+
+@keyframes ripple-animation {
+  from {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+
+  to {
+    transform: scale(100);
+    opacity: 0;
+  }
 }

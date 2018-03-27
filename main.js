@@ -16,7 +16,7 @@
             color: var(--toggle-button-color, currentColor);
             background-color: var(--toggle-button-background-color, currentColor);
             padding: 10px 20px;
-            border-radius: var(--toggle-button-border-radius, 0)
+            border-radius: var(--toggle-button-border-radius, 0);
         }
         :host([pressed]) {
             background: lightgreen;
@@ -56,6 +56,8 @@
 
       this.addEventListener('click', this._onClick);
       this.addEventListener('keydown', this._onKeyDown);
+      this.addEventListener('click', e => this._drawRipple(e.offsetX, e.offsetY));
+
     }
 
     set pressed(value) {
@@ -77,7 +79,6 @@
         this.setAttribute('disabled', '');
       } else {
         this.removeAttribute('disabled');
-        s;
       }
     }
 
@@ -112,6 +113,18 @@
 
     _togglePressed() {
       this.pressed = !this.pressed;
+    }
+
+    // Material design ripple animation.
+    _drawRipple(x, y) {
+      let div = document.createElement('div');
+      div.classList.add('ripple');
+      this.appendChild(div);
+      div.style.top = `${y - div.clientHeight/2}px`;
+      div.style.left = `${x - div.clientWidth/2}px`;
+      div.style.backgroundColor = 'currentColor';
+      div.classList.add('run');
+      div.addEventListener('transitionend', event => div.remove());
     }
   }
 
