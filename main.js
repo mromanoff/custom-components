@@ -9,7 +9,7 @@
 
   const template = document.createElement('template');
   template.innerHTML = `
-    <style>
+    <style>        
         :host {
             display: inline-block;
             border: var(--toggle-button-border,  2px solid currentColor);
@@ -17,6 +17,8 @@
             background-color: var(--toggle-button-background-color, currentColor);
             padding: 10px 20px;
             border-radius: var(--toggle-button-border-radius, 0);
+            position: relative;
+            overflow: hidden;
         }
         :host([pressed]) {
             background: lightgreen;
@@ -25,7 +27,7 @@
         :host([disabled]) {
             opacity: 0.5;
             pointer-events: none;
-        }
+        }       
     </style>
     <slot></slot>
   `;
@@ -54,10 +56,11 @@
         this.setAttribute('area-pressed', 'false');
       }
 
-      this.addEventListener('click', this._onClick);
       this.addEventListener('keydown', this._onKeyDown);
-      this.addEventListener('click', e => this._drawRipple(e.offsetX, e.offsetY));
-
+      this.addEventListener('click', e => {
+        this._drawRipple(e.offsetX, e.offsetY);
+        this._onClick();
+      });
     }
 
     set pressed(value) {
@@ -118,13 +121,16 @@
     // Material design ripple animation.
     _drawRipple(x, y) {
       let div = document.createElement('div');
+      let event = new Event('transitionend');
       div.classList.add('ripple');
       this.appendChild(div);
-      div.style.top = `${y - div.clientHeight/2}px`;
-      div.style.left = `${x - div.clientWidth/2}px`;
+      div.style.top = `${y - div.clientHeight / 2}px`;
+      div.style.left = `${x - div.clientWidth / 2}px`;
       div.style.backgroundColor = 'currentColor';
-      div.classList.add('run');
-      div.addEventListener('transitionend', event => div.remove());
+      div.addEventListener('transitionend', () => div.remove());
+      window.setTimeout(() => {
+        div.dispatchEvent(event);
+      }, 1900);
     }
   }
 
