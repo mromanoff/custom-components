@@ -19,6 +19,7 @@
             border-radius: var(--toggle-button-border-radius, 0);
             position: relative;
             overflow: hidden;
+            font-size: 12px;
         }
         :host([pressed]) {
             background: lightgreen;
