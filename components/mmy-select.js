@@ -78,7 +78,6 @@
       this._submit.addEventListener('click', this._onSubmit.bind(this));
 
       this.state = {
-        canSubmit: false,
         make: null,
         model: null,
         year: null,
@@ -91,30 +90,19 @@
       this._initYears();
     }
 
-    set disabled(value) {
+    set _canSubmit(value) {
       const isDisabled = Boolean(value);
-      if (isDisabled) {
+      // expect true for submit and false to disabled
+      if (!isDisabled) {
         this._submit.setAttribute('disabled', '');
       } else {
         this._submit.removeAttribute('disabled');
       }
     }
 
-    get disabled() {
+    get _canSubmit() {
       return this._submit.hasAttribute('disabled');
     }
-
-    _toggleDisabled() {
-      this.disabled = !this.disabled;
-    }
-
-    // _canSubmit() {
-    //   if (!this.state.canSubmit) {
-    //     this._submit.setAttribute('disabled', 'disabled');
-    //   } else {
-    //     this._submit.removeAttribute('disabled');
-    //   }
-    // }
 
     _initMakes() {
       let popular = MOCK_DATA_MAKES.filter(makes => makes.isPopular === true);
@@ -133,7 +121,6 @@
     }
 
     _initYears() {
-      console.log('init years');
       this._createOptionList(this._years, MOCK_DATA_YEARS);
     }
 
@@ -176,10 +163,8 @@
         event.currentTarget.options[event.currentTarget.selectedIndex].value;
       this._setState({
         year,
-        canSubmit: true,
       });
-      //this._canSubmit();
-      this._toggleDisabled();
+      this._canSubmit = true;
     }
 
     _onSubmit() {
