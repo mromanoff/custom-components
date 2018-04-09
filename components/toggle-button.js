@@ -90,7 +90,7 @@
       return this.hasAttribute('disabled');
     }
 
-    attributeChangeCallback(name, oldVal, newVal) {
+    attributeChangedCallback(name, oldVal, newVal) {
       const hasValue = newVal !== null;
       this.setAttribute(`area-${name}`, hasValue);
     }

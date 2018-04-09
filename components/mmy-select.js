@@ -60,10 +60,6 @@
   `;
 
   class MMYSelect extends HTMLElement {
-    static get observedAttributes() {
-      return ['pressed', 'disabled'];
-    }
-
     constructor() {
       super();
       this.attachShadow({ mode: 'open' });
@@ -121,28 +117,42 @@
     // }
 
     _initMakes() {
-      console.log('init makes');
-      this._initDropdownList(this._makes, MOCK_DATA_MAKES);
+      let popular = MOCK_DATA_MAKES.filter(makes => makes.isPopular === true);
+      let other = MOCK_DATA_MAKES.filter(makes => makes.isPopular === false);
+
+      this._createOptGroup(this._makes, popular, 'Popular Makes');
+      this._createOptGroup(this._makes, other, 'Other Makes');
     }
 
     _initModels() {
-      console.log('init models');
-      this._initDropdownList(this._models, MOCK_DATA_MODELS);
+      let current = MOCK_DATA_MODELS.filter(makes => makes.isOld !== true);
+      let old = MOCK_DATA_MODELS.filter(makes => makes.isOld === false);
+
+      this._createOptGroup(this._models, current, 'Current Models');
+      this._createOptGroup(this._models, old, 'Older Models');
     }
 
     _initYears() {
       console.log('init years');
-      this._initDropdownList(this._years, MOCK_DATA_YEARS);
+      this._createOptionList(this._years, MOCK_DATA_YEARS);
     }
 
-    _initDropdownList(el, options) {
+    _createOptionList(el, options) {
       let option;
       options.forEach(item => {
         option = document.createElement('option');
         option.value = item.id;
         option.text = item.title;
-        el.add(option);
+        el.appendChild(option);
       });
+    }
+
+    _createOptGroup(el, options, label) {
+      let optgroup;
+      optgroup = document.createElement('optgroup');
+      optgroup.label = label;
+      el.appendChild(optgroup);
+      this._createOptionList(optgroup, options);
     }
 
     _onMakeChange(event) {
