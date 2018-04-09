@@ -8,6 +8,21 @@
         :host {
             display: block;
         }
+        
+        :host([horizontal]) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+                
+        :host([horizontal]) > *  {
+            margin: 0 10px 0 0;
+            width: 25%;
+        }
+        
+        :host([horizontal]) > :last-child {
+            margin: 0;
+        }
                 
         select {
             height: 2rem;
@@ -154,12 +169,12 @@
         canSubmit: true,
       });
       //this._canSubmit();
-      this._toggleDisabled()
+      this._toggleDisabled();
     }
 
     _onSubmit() {
-      const {make, model, year} = this.state;
-      console.log('submit', `/makes/${make}/models/${model}/years/${year}` );
+      const { make, model, year } = this.state;
+      console.log('submit', `/makes/${make}/models/${model}/years/${year}`);
     }
 
     _setState(newState) {
