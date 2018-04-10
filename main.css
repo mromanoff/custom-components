@@ -13,6 +13,10 @@ body {
   padding: 1rem;
 }
 
+.component {
+  margin-bottom: 3rem;
+}
+
 .ripple {
   position: absolute;
   border-radius: 50%;
