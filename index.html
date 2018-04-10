@@ -11,9 +11,9 @@
 
 <section class="component">
     <h2>Toggle Button</h2>
-    <toggle-button>Toggle button</toggle-button>
+    <toggle-button data-button="1">Toggle button</toggle-button>
     <toggle-button disabled>Disabled button</toggle-button>
-    <toggle-button pressed>Pressed button</toggle-button>
+    <toggle-button data-button="2" pressed>Pressed button</toggle-button>
 </section>
 
 <section class="component">
@@ -27,5 +27,15 @@
 </section>
 
 <script src="main.js"></script>
+
+<script>
+    const buttons = document.querySelectorAll('toggle-button');
+
+    buttons.forEach( button => {
+      button.addEventListener('click', event => console.log('button clicked', event.currentTarget.dataset.button))
+    });
+
+
+</script>
 </body>
 </html>
