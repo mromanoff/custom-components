@@ -85,31 +85,29 @@
     }
 
     connectedCallback() {
-      this._initMakes();
-      this._initModels();
+      this._fetch('dist/mock-makes.json').then(data => this._initMakes(data));
+      this._fetch('dist/mock-makes.json').then(data => this._initModels(data));
+      //this._initModels();
       this._initYears();
     }
 
-    set _canSubmit(value) {
-      const isDisabled = Boolean(value);
-      // expect true for submit and false to disabled
-      if (!isDisabled) {
-        this._submit.setAttribute('disabled', '');
-      } else {
-        this._submit.removeAttribute('disabled');
+    async _fetch(uri) {
+      try {
+        const response = await fetch(uri);
+        return await response.json();
+      } catch (error) {
+        console.error(error);
+      }
+      finally {
+        console.log('finally');
       }
     }
 
-    get _canSubmit() {
-      return this._submit.hasAttribute('disabled');
-    }
-
-    _initMakes() {
-      let popular = MOCK_DATA_MAKES.filter(makes => makes.isPopular === true);
-      let other = MOCK_DATA_MAKES.filter(makes => makes.isPopular === false);
-
-      this._createOptGroup(this._makes, popular, 'Popular Makes');
-      this._createOptGroup(this._makes, other, 'Other Makes');
+    async _initMakes(data) {
+        const popular = data.filter(makes => makes.isPopular === true);
+        const other = data.filter(makes => makes.isPopular === false);
+        this._createOptGroup(this._makes, popular, 'Popular Makes');
+        this._createOptGroup(this._makes, other, 'Other Makes');
     }
 
     _initModels() {
@@ -174,6 +172,20 @@
 
     _setState(newState) {
       this.state = Object.assign({}, this.state, newState);
+    }
+
+    set _canSubmit(value) {
+      const isDisabled = Boolean(value);
+      // expect true for submit and false to disabled
+      if (!isDisabled) {
+        this._submit.setAttribute('disabled', '');
+      } else {
+        this._submit.removeAttribute('disabled');
+      }
+    }
+
+    get _canSubmit() {
+      return this._submit.hasAttribute('disabled');
     }
   }
   const MOCK_DATA_MAKES = [

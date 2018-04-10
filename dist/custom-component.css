@@ -1,0 +1,60 @@
+:root {
+  --toggle-button-color: #2d7dff;
+  --toggle-button-background-color: #e4edff;
+  --toggle-button-border-radius: 4px;
+
+  font-size: 1em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial,
+  sans-serif;
+}
+
+body {
+  padding: 1rem;
+}
+
+toggle-button {
+  overflow: hidden;
+}
+
+._ripple_s2sv3_20 {
+  position: absolute;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background: white;
+  -webkit-animation: _ripple-animation_s2sv3_1 2s;
+          animation: _ripple-animation_s2sv3_1 2s;
+}
+
+
+
+@-webkit-keyframes _ripple-animation_s2sv3_1 {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 0.4;
+  }
+
+  to {
+    -webkit-transform: scale(100);
+            transform: scale(100);
+    opacity: 0;
+  }
+}
+
+
+
+@keyframes _ripple-animation_s2sv3_1 {
+  from {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 0.4;
+  }
+
+  to {
+    -webkit-transform: scale(100);
+            transform: scale(100);
+    opacity: 0;
+  }
+}
