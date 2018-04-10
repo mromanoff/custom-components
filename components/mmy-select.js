@@ -86,9 +86,8 @@
 
     connectedCallback() {
       this._fetch('dist/mock-makes.json').then(data => this._initMakes(data));
-      this._fetch('dist/mock-makes.json').then(data => this._initModels(data));
-      //this._initModels();
-      this._initYears();
+      this._fetch('dist/mock-models.json').then(data => this._initModels(data));
+      this._fetch('dist/mock-years.json').then(data => this._initYears(data));
     }
 
     async _fetch(uri) {
@@ -97,29 +96,27 @@
         return await response.json();
       } catch (error) {
         console.error(error);
-      }
-      finally {
+      } finally {
         console.log('finally');
       }
     }
 
-    async _initMakes(data) {
-        const popular = data.filter(makes => makes.isPopular === true);
-        const other = data.filter(makes => makes.isPopular === false);
-        this._createOptGroup(this._makes, popular, 'Popular Makes');
-        this._createOptGroup(this._makes, other, 'Other Makes');
+    _initMakes(data) {
+      const popular = data.filter(makes => makes.isPopular === true);
+      const other = data.filter(makes => makes.isPopular === false);
+      this._createOptGroup(this._makes, popular, 'Popular Makes');
+      this._createOptGroup(this._makes, other, 'Other Makes');
     }
 
-    _initModels() {
-      let current = MOCK_DATA_MODELS.filter(makes => makes.isOld !== true);
-      let old = MOCK_DATA_MODELS.filter(makes => makes.isOld === false);
-
+    _initModels(data) {
+      const current = data.filter(makes => makes.isOld !== true);
+      const old = data.filter(makes => makes.isOld === false);
       this._createOptGroup(this._models, current, 'Current Models');
       this._createOptGroup(this._models, old, 'Older Models');
     }
 
-    _initYears() {
-      this._createOptionList(this._years, MOCK_DATA_YEARS);
+    _initYears(data) {
+      this._createOptionList(this._years, data);
     }
 
     _createOptionList(el, options) {
@@ -188,102 +185,6 @@
       return this._submit.hasAttribute('disabled');
     }
   }
-  const MOCK_DATA_MAKES = [
-    { id: 'acura', title: 'Acura', isPopular: true },
-    { id: 'audi', title: 'Audi', isPopular: true },
-    { id: 'bmw', title: 'BMW', isPopular: true },
-    { id: 'buick', title: 'Buick', isPopular: true },
-    { id: 'cadillac', title: 'Cadillac', isPopular: true },
-    { id: 'chevrolet', title: 'Chevrolet', isPopular: true },
-    { id: 'chrysler', title: 'Chrysler', isPopular: true },
-    { id: 'dodge', title: 'Dodge', isPopular: true },
-    { id: 'ford', title: 'Ford', isPopular: true },
-    { id: 'gmc', title: 'GMC', isPopular: true },
-    { id: 'honda', title: 'Honda', isPopular: true },
-    { id: 'hyundai', title: 'Hyundai', isPopular: true },
-    { id: 'jaguar', title: 'Jaguar', isPopular: true },
-    { id: 'jeep', title: 'Jeep', isPopular: true },
-    { id: 'kia', title: 'Kia', isPopular: true },
-    { id: 'land-rover', title: 'Land Rover', isPopular: true },
-    { id: 'lexus', title: 'Lexus', isPopular: true },
-    { id: 'lincoln', title: 'Lincoln', isPopular: true },
-    { id: 'mazda', title: 'Mazda', isPopular: true },
-    { id: 'mercedes-benz', title: 'Mercedes-Benz', isPopular: true },
-    { id: 'mercury', title: 'Mercury', isPopular: true },
-    { id: 'mitsubishi', title: 'Mitsubishi', isPopular: true },
-    { id: 'nissan', title: 'Nissan', isPopular: true },
-    { id: 'pontiac', title: 'Pontiac', isPopular: true },
-    { id: 'porsche', title: 'Porsche', isPopular: true },
-    { id: 'saturn', title: 'Saturn', isPopular: true },
-    { id: 'scion', title: 'Scion', isPopular: true },
-    { id: 'subaru', title: 'Subaru', isPopular: true },
-    { id: 'suzuki', title: 'Suzuki', isPopular: true },
-    { id: 'toyota', title: 'Toyota', isPopular: true },
-    { id: 'volkswagen', title: 'Volkswagen', isPopular: true },
-    { id: 'volvo', title: 'Volvo', isPopular: true },
-    { id: 'alfa-romeo', title: 'Alfa Romeo', isPopular: false },
-    { id: 'am-general', title: 'AM General', isPopular: false },
-    { id: 'aston-martin', title: 'Aston Martin', isPopular: false },
-    { id: 'bentley', title: 'Bentley', isPopular: false },
-    { id: 'daewoo', title: 'Daewoo', isPopular: false },
-    { id: 'daihatsu', title: 'Daihatsu', isPopular: false },
-    { id: 'eagle', title: 'Eagle', isPopular: false },
-    { id: 'ferrari', title: 'Ferrari', isPopular: false },
-    { id: 'fiat', title: 'FIAT', isPopular: false },
-    { id: 'fisker', title: 'Fisker', isPopular: false },
-    { id: 'freightliner', title: 'Freightliner', isPopular: false },
-    { id: 'genesis', title: 'Genesis', isPopular: false },
-    { id: 'geo', title: 'Geo', isPopular: false },
-    { id: 'hummer', title: 'HUMMER', isPopular: false },
-    { id: 'infiniti', title: 'INFINITI', isPopular: false },
-    { id: 'isuzu', title: 'Isuzu', isPopular: false },
-    { id: 'lamborghini', title: 'Lamborghini', isPopular: false },
-    { id: 'lotus', title: 'Lotus', isPopular: false },
-    { id: 'maserati', title: 'Maserati', isPopular: false },
-    { id: 'maybach', title: 'Maybach', isPopular: false },
-    { id: 'mclaren', title: 'McLaren', isPopular: false },
-    { id: 'merkur', title: 'Merkur', isPopular: false },
-    { id: 'mini', title: 'MINI', isPopular: false },
-    { id: 'oldsmobile', title: 'Oldsmobile', isPopular: false },
-    { id: 'panoz', title: 'Panoz', isPopular: false },
-    { id: 'peugeot', title: 'Peugeot', isPopular: false },
-    { id: 'plymouth', title: 'Plymouth', isPopular: false },
-    { id: 'ram', title: 'Ram', isPopular: false },
-    { id: 'rolls-royce', title: 'Rolls-Royce', isPopular: false },
-    { id: 'saab', title: 'Saab', isPopular: false },
-    { id: 'smart', title: 'smart', isPopular: false },
-    { id: 'sterling', title: 'Sterling', isPopular: false },
-    { id: 'tesla', title: 'Tesla', isPopular: false },
-  ];
-
-  const MOCK_DATA_YEARS = [
-    { id: 2018, title: 2018 },
-    { id: 2017, title: 2017 },
-    { id: 2016, title: 2016 },
-    { id: 2015, title: 2015 },
-    { id: 2014, title: 2014 },
-    { id: 2013, title: 2013 },
-  ];
-
-  const MOCK_DATA_MODELS = [
-    { id: 'ilx', title: 'ILX', isOld: false },
-    { id: 'mdx', title: 'MDX', isOld: false },
-    { id: 'nsx', title: 'NSX', isOld: false },
-    { id: 'rdx', title: 'RDX', isOld: false },
-    { id: 'rlx', title: 'RLX', isOld: false },
-    { id: 'tl', title: 'TL', isOld: false },
-    { id: 'tlx', title: 'TLX', isOld: false },
-    { id: 'tsx', title: 'TSX', isOld: false },
-    { id: 'tsx-sport-wagon', title: 'TSX Sport Wagon', isOld: false },
-    { id: 'cl', title: 'CL', isOld: true },
-    { id: 'integra', title: 'Integra', isOld: true },
-    { id: 'legend', title: 'Legend', isOld: true },
-    { id: 'rl', title: 'RL', isOld: true },
-    { id: 'rsx', title: 'RSX', isOld: true },
-    { id: 'slx', title: 'SLX', isOld: true },
-    { id: 'vigor', title: 'Vigor', isOld: true },
-    { id: 'zdx', title: 'ZDX', isOld: true },
-  ];
 
   window.customElements.define('mmy-select', MMYSelect);
 })();

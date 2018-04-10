@@ -1,0 +1,19 @@
+[
+  { "id": "ilx", "title": "ILX", "isOld": false },
+  { "id": "mdx", "title": "MDX", "isOld": false },
+  { "id": "nsx", "title": "NSX", "isOld": false },
+  { "id": "rdx", "title": "RDX", "isOld": false },
+  { "id": "rlx", "title": "RLX", "isOld": false },
+  { "id": "tl", "title": "TL", "isOld": false },
+  { "id": "tlx", "title": "TLX", "isOld": false },
+  { "id": "tsx", "title": "TSX", "isOld": false },
+  { "id": "tsx-sport-wagon", "title": "TSX Sport Wagon", "isOld": false },
+  { "id": "cl", "title": "CL", "isOld": true },
+  { "id": "integra", "title": "Integra", "isOld": true },
+  { "id": "legend", "title": "Legend", "isOld": true },
+  { "id": "rl", "title": "RL", "isOld": true },
+  { "id": "rsx", "title": "RSX", "isOld": true },
+  { "id": "slx", "title": "SLX", "isOld": true },
+  { "id": "vigor", "title": "Vigor", "isOld": true },
+  { "id": "zdx", "title": "ZDX", "isOld": true }
+]
