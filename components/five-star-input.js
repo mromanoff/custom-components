@@ -96,6 +96,18 @@
             super();
             this.attachShadow({mode: 'open'});
             this.shadowRoot.appendChild(template.content.cloneNode(true));
+            this.radios = this.shadowRoot.querySelectorAll('input');
+            this._setInputName();
+        }
+
+        get name() {
+            return this.getAttribute('name');
+        }
+
+        _setInputName() {
+            if(this.name) {
+                this.radios.forEach(radio => radio.setAttribute('name', this.name));
+            }
         }
     }
 
