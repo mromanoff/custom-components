@@ -7,4 +7,5 @@
 5. open http://localhost:1234
 
 1) toggle button `<toggle-button>`
-1) make model year select `<mmy-select>`
+2) make model year select `<mmy-select>`
+3) make model year select `<five-star-input>`

@@ -17,7 +17,7 @@
 </section>
 
 <section class="component">
-    <h2>Make Model Year Select</h2>
+    <h2>Make Model Year Select (horizontal)</h2>
     <mmy-select horizontal></mmy-select>
 </section>
 
@@ -26,13 +26,20 @@
     <mmy-select></mmy-select>
 </section>
 
+<section class="component">
+    <h2>Five Star Input</h2>
+    <five-star-input></five-star-input>
+    <five-star-input style="--star-active: #3a64ff"></five-star-input>
+    <five-star-input style="--star-active: #00b094; --star-default: rgba(80,96,137,0.75)"></five-star-input>
+</section>
+
 <script src="main.js"></script>
 
 <script>
     const buttons = document.querySelectorAll('toggle-button');
 
-    buttons.forEach( button => {
-      button.addEventListener('click', event => console.log('button clicked', event.currentTarget.dataset.button))
+    buttons.forEach(button => {
+        button.addEventListener('click', event => console.log('button clicked', event.currentTarget.dataset.button))
     });
 
 
