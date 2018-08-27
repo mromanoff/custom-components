@@ -8,4 +8,5 @@
 
 1) toggle button `<toggle-button>`
 2) make model year select `<mmy-select>`
-3) make model year select `<five-star-input>`
+3) five star rating `<five-star-input>`
+3) Radial Bar rating chart `<rating-chart>`
