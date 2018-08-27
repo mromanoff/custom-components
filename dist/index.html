@@ -11,9 +11,9 @@
 
 <section class="component">
     <h2>Rating Chart</h2>
-    <rating-chart value="3"></rating-chart>
-    <rating-chart value="5"></rating-chart>
-    <rating-chart value="9"></rating-chart>
+    <rating-chart value="3" size="60"></rating-chart>
+    <rating-chart value="5" color="#EE5A24" size="120"></rating-chart>
+    <rating-chart value="9" color="#A3CB38" size="180"></rating-chart>
 </section>
 
 <section class="component">
@@ -36,20 +36,17 @@
 <section class="component">
     <h2>Five Star Input</h2>
     <five-star-input></five-star-input>
-    <five-star-input style="--star-active: #3a64ff"></five-star-input>
-    <five-star-input name="custom-name" style="--star-active: #00b094; --star-default: rgba(80,96,137,0.75)"></five-star-input>
+    <five-star-input style="--star-active:#3a64ff;"></five-star-input>
+    <five-star-input name="custom-name" style="--star-active: #00b094; --star-default: rgba(80, 96, 137, 0.75);"></five-star-input>
 </section>
 
 <script src="/dist/custom-component.js"></script>
 
 <script>
-    const buttons = document.querySelectorAll('toggle-button');
-
-    buttons.forEach(button => {
-        button.addEventListener('click', event => console.log('button clicked', event.currentTarget.dataset.button))
-    });
-
-
+  const buttons = document.querySelectorAll('toggle-button');
+  buttons.forEach(button => {
+    button.addEventListener('click', event => console.log('button clicked', event.currentTarget.dataset.button));
+  });
 </script>
 </body>
 </html>

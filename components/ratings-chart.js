@@ -6,24 +6,16 @@
   template.innerHTML = `
     <style>        
         :host {
-            display: inline-block;
-        }   
-        
-        .chart {
-        }  
-        
-        .radialBarBase {
-            stroke: rgba(209,236,255,0.92);
-        }
-        
-        .radialBar {
-            stroke: #5dc7c3;
-        }
+            all: initial;
+            display: block;
+            contain: content;
+        }                   
     </style>
-    <svg class="chart" viewbox="0 0 170 170" width="170" height="170"
+    <svg viewbox="0 0 170 170" width="170" height="170"
          xmlns="http://www.w3.org/2000/svg">
          <g transform="rotate(105 85 85)">
-            <circle class="radialBarBase"
+            <circle 
+                    stroke="rgba(209,236,255,0.92)"
                     stroke-width="14"
                     fill="none"
                     cx="85"
@@ -37,6 +29,7 @@
 
          <g transform="rotate(105 85 85)">
           <circle class="radialBar" stroke-width="14"
+                  stroke="#5dc7c3"
                   stroke-dasharray="0, 400.35"
                   stroke-linecap="butt"
                   fill="none"
@@ -51,7 +44,8 @@
               x="85"
               y="85"
               alignment-baseline="central"
-              text-anchor="middle" font-size="46">
+              text-anchor="middle" 
+              font-size="80">
         </text>
     </svg>
   `;
@@ -68,7 +62,6 @@
     Stroke length = (range / 100) * Percentage to fill
     */
 
-
     //  if ratings =='N/A'
     //  set ratings = 0
     //  endif
@@ -84,12 +77,13 @@
       this.attachShadow({mode: 'open'});
       this.shadowRoot.appendChild(template.content.cloneNode(true));
 
+      this.svg = this.shadowRoot.querySelector('svg');
       this.text = this.shadowRoot.querySelector('text');
       this.radialBar = this.shadowRoot.querySelector('.radialBar');
     }
 
     static get observedAttributes() {
-      return ['value'];
+      return ['value', 'color', 'size'];
     }
 
     get value() {
@@ -100,9 +94,38 @@
       this.setAttribute('value', newValue);
     }
 
+    get size() {
+      return this.getAttribute('size');
+    }
+
+    set size(newValue) {
+      this.setAttribute('size', newValue);
+    }
+
+    get color() {
+      return this.getAttribute('color');
+    }
+
+    set color(newValue) {
+      this.setAttribute('color', newValue);
+    }
+
     attributeChangedCallback(name, oldValue, newValue) {
-      this.text.innerHTML = this.value;
-      this.radialBar.setAttribute('stroke-dasharray', `${(400.35 / 100) * (this.value * 10)}, 400.35`);
+      switch (name) {
+        case 'value':
+          this.text.innerHTML = this.value;
+          this.radialBar.setAttribute('stroke-dasharray', `${(400.35 / 100) * (this.value * 10)}, 400.35`);
+          break;
+
+        case 'size':
+          this.svg.setAttribute('width', this.size);
+          this.svg.setAttribute('height', this.size);
+          break;
+
+        case 'color':
+          this.radialBar.setAttribute('stroke', this.color);
+          break;
+      }
     }
   }
 
