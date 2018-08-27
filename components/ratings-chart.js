@@ -13,11 +13,11 @@
         }  
         
         .radialBarBase {
-            stroke: #9ec2e1;
+            stroke: rgba(209,236,255,0.92);
         }
         
         .radialBar {
-            stroke: #45ABB3;
+            stroke: #5dc7c3;
         }
     </style>
     <svg class="chart" viewbox="0 0 170 170" width="170" height="170"
@@ -28,18 +28,17 @@
                     fill="none"
                     cx="85"
                     cy="85"
-                    stroke-linecap="round"
+                    stroke-linecap="butt"
                     stroke-dasharray="400.35, 400.35"
                     r="70"
- 
                     >
             </circle>
         </g>
 
          <g transform="rotate(105 85 85)">
-          <circle id="circle" class="radialBar" stroke-width="14"
+          <circle class="radialBar" stroke-width="14"
                   stroke-dasharray="0, 400.35"
-                  stroke-linecap="round"
+                  stroke-linecap="butt"
                   fill="none"
                   cx="85"
                   cy="85"
@@ -48,21 +47,16 @@
           </circle>
         </g>
 
-        <text id="label" class="ratings-chart__rating"
+        <text class="label"
               x="85"
               y="85"
               alignment-baseline="central"
               text-anchor="middle" font-size="46">
-            <slot>70</slot>
         </text>
     </svg>
   `;
 
   class RatingChart extends HTMLElement {
-    static get observedAttributes() {
-      return ['rating', 'value'];
-    }
-
     /*
     Example:
     Radius = 85
@@ -90,14 +84,25 @@
       this.attachShadow({mode: 'open'});
       this.shadowRoot.appendChild(template.content.cloneNode(true));
 
-      this.label = this.shadowRoot.getElementById('label');
-      this.circle = this.shadowRoot.getElementById('circle');
+      this.text = this.shadowRoot.querySelector('text');
+      this.radialBar = this.shadowRoot.querySelector('.radialBar');
     }
 
-    attributeChangedCallback(name, oldVal, newVal) {
-      const hasValue = newVal !== null;
-      this.label.innerHTML = hasValue ? newVal : oldVal;
-      this.circle.setAttribute('stroke-dasharray', `${(400.35 / 100) * (newVal * 10)}, 400.35`);
+    static get observedAttributes() {
+      return ['value'];
+    }
+
+    get value() {
+      return this.getAttribute('value');
+    }
+
+    set value(newValue) {
+      this.setAttribute('value', newValue);
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+      this.text.innerHTML = this.value;
+      this.radialBar.setAttribute('stroke-dasharray', `${(400.35 / 100) * (this.value * 10)}, 400.35`);
     }
   }
 
